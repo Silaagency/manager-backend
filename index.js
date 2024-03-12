@@ -3,7 +3,22 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
+const cors = require('cors');
 const saltRounds = 10;
+
+const whitelist = ['https://manager-rouge-beta.vercel.app']; // assuming front-end application is running on localhost port 3000
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+
 
 
 // Connect to MongoDB
@@ -131,15 +146,16 @@ const Admin = mongoose.model('Admin', adminSchema);
 
 // Create Express app
 const app = express();
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
 app.get('/employees', async (req, res) => {
   try {
     const filters = {};
-
+    
     // Apply filters based on query parameters
-
+    
     const employees = await Employee.find(req.query);
     res.status(200).json(employees);
   } catch (err) {
