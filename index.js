@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 const cors = require('cors');
 const saltRounds = 10;
 
-const whitelist = ['https://manager-rouge-beta.vercel.app']; // assuming front-end application is running on localhost port 3000
+const whitelist = ['*']; // assuming front-end application is running on localhost port 3000
 
 const corsOptions = {
   origin: function (origin, callback) {
