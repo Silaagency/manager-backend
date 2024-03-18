@@ -109,6 +109,7 @@ const paymentDetailsSchema = new mongoose.Schema({
 
 const paymentSchema = new mongoose.Schema({
   employee: { type: String, required: true },
+  comment: { type: String, required: true},
   date: { type: Date, required: true },
   amount: { type: Number, required: true },
 });
