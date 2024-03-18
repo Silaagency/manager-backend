@@ -12,11 +12,8 @@ const corsOptions = {
   origin: '*',
 }
 
-
-
-
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://kothmane98:Suc3WkFiHj1Er9W7@cluster0.hm8syu0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
+mongoose.connect("mongodb+srv://kothmane98:PB2cpvKAFRm3YDNH@cluster0.ujtm73l.mongodb.net/?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
