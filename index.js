@@ -168,6 +168,30 @@ app.get('/employees/:email', async (req, res) => {
   }
 });
 
+app.delete('/employees/:email', async (req, res) => {
+  try {
+    const employee = await Employee.findOne({ "employeeInfo.email": req.params.email });
+    if (!employee) {
+      return res.status(404).json({ error: 'Employee not found' });
+    }
+    const email = employee.employeeInfo.email;
+    const admin = await Admin.findOne({"email" : email});
+
+    if (admin != null)
+    {
+      return res.status(401).json({ error: 'Cannot delete an admin' });
+    }
+
+    const deletedEmp = await Employee.findOneAndDelete({ "employeeInfo.email": req.params.email });
+    const deletedConfEmp = await ConfirmedEmployee.findOneAndDelete({ "employeeInfo.email": req.params.email });
+
+    res.status(200).json(deletedEmp);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 app.post('/employees', async (req, res) => {
   const employee = new Employee(req.body);
   
