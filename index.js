@@ -346,6 +346,18 @@ app.get('/services/:name', async (req, res) => {
   }
 });
 
+app.delete('/services/:name', async (req, res) => {
+  try {
+    const service = await Service.findOneAndDelete({ name: req.params.name });
+    if (!service) {
+      return res.status(404).json({ error: 'Service not found' });
+    }
+    res.status(200).json(service);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to delete service' });
+  }
+});
+
 
 app.post('/services', async (req, res) => {
   try {
