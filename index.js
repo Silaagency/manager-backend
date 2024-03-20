@@ -183,7 +183,7 @@ app.delete('/employees/:email', async (req, res) => {
     }
 
     const deletedEmp = await Employee.findOneAndDelete({ "employeeInfo.email": req.params.email });
-    const deletedConfEmp = await ConfirmedEmployee.findOneAndDelete({ "employeeInfo.email": req.params.email });
+    const deletedConfEmp = await ConfirmedEmployee.findOneAndDelete({ "email": req.params.email });
 
     res.status(200).json(deletedEmp);
   } catch (err) {
