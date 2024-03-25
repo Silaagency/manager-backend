@@ -283,7 +283,8 @@ app.post('/login', async (req, res) => {
     if (!user) {
       if (new_user != null)
         return res.status(401).json({ error: "votre compte n'a pas encore été validé par l'administrateur" });
-      return res.status(401).json({ error: 'Invalid email or password' });
+      else
+        return res.status(401).json({ error: 'Invalid email or password' });
     }
 
     // Compare the provided password with the stored password hash
