@@ -256,7 +256,8 @@ app.get('/new-employees', async (req, res) => {
 app.get('/email-used', async (req, res) => {
   try {
     const employee = await ConfirmedEmployee.find({email: req.query.email});
-    if (employee.length == 0)
+    const newEmployee = await NewEmployeeInfo.find({email: req.query.email});
+    if (employee.length == 0 && newEmployee.length == 0)
     {
       res.status(200).json({used: false})
     }
