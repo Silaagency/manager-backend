@@ -95,7 +95,7 @@ const commissionSchema = new mongoose.Schema({
   project: { type: projectInfoSchema, required: true },
   employee: { type: String, required: true },
   status: { type: String, required: true },
-  employeeComment: { type: String, required: true },
+  employeeComment: { type: String, required: false },
   employerComment: { type: String, required: false },
 });
 
@@ -261,7 +261,7 @@ app.get('/email-used', async (req, res) => {
     {
       res.status(200).json({used: false})
     }
-    else 
+    else
     {
       res.status(200).json({used: true})
     }
