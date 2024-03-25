@@ -277,9 +277,12 @@ app.post('/login', async (req, res) => {
 
     // Find the user by email
     const user = await ConfirmedEmployee.findOne({ email });
+    const new_user = await NewEmployeeInfo.findOne({ email });
 
     // If user is not found, return an error
     if (!user) {
+      if (new_user != null)
+        return res.status(401).json({ error: "votre compte n'a pas encore été validé par l'administrateur" });
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
